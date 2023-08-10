@@ -1,0 +1,222 @@
+<!-- views/login.ejs -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            box-sizing: border-box !important;
+        }
+
+        body {
+            /* background-color: red !important; */
+            background-image: url("http://localhost:5000/bg.png") !important;
+
+        }
+
+        .link {
+            text-decoration: none;
+            color: #333366;
+            font-weight: 600;
+        }
+
+        input {
+            border: 1px solid #EAEAEA !important;
+            border-radius: 7px !important;
+            width: 400px !important;
+            height: 60px !important;
+            outline: none !important;
+            color: #333366 !important;
+            margin-bottom: 15px !important;
+            font-size: 20px !important;
+            background-color: #FFFFFF !important;
+            padding: 12px 15px !important;
+        }
+
+        input:focus {
+            /* border: 1px solid #333366 !important; */
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        button {
+            background-color: #333366 !important;
+            border-radius: 8px !important;
+            color: #FFFFFF !important;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+            height: 55px !important;
+            margin-top: 10px !important;
+            font-size: 20px !important;
+            font-weight: 600 !important;
+        }
+
+        .flex {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            flex-direction: column !important;
+        }
+
+        .frame {
+            border-radius: 30px;
+            box-shadow: 0px 0px 34px 0px #00000014;
+        }
+
+        .login-birthday {
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .birthday-image {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #FF9933;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: 140px;
+            z-index: 1000;
+        }
+
+        .birthday-img {
+            position: relative;
+            z-index: 1;
+        }
+
+        .birthday-back {
+            content: '';
+            width: 200px;
+            height: 200px;
+            background-color: #ffd6ad;
+            bottom: -5px;
+            left: -10px;
+            position: absolute;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .greet {
+            font-size: 30px;
+            font-weight: 700;
+            line-height: 40px;
+            /* color: $theme-bg-color-darkgray; */
+            margin: 50px 0 0 0;
+            letter-spacing: 0px;
+        }
+
+        .greet-span {
+            color: #FF9933;
+            font-size: 25px;
+            font-weight: 400;
+            margin: 0 0 13px 0;
+        }
+
+        .greet-p {
+            margin: 0 0 30px 0;
+            font-size: 15px;
+            line-height: 24px;
+            font-weight: 400;
+            max-width: 300px;
+        }
+
+        .loginAlert {
+            /* background-color: #FFFFFF; */
+            border: 1px solid red;
+            color: red;
+            width: 71%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            border-radius: 5px;
+            margin: -30px 0 30px 0;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>SSO Login</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" style="height: 100vh !important;">
+
+            <!-- Form Div -->
+            <div class="col-md-6 p-5 flex">
+                <img src="http://localhost:5000/logo.png" alt="logo">
+                <br><br>
+                <h3>Welcome!</h3><br><br>
+
+                <% if (loginProps.error !=="" ) { %>
+                    <div class="loginAlert">
+                        <%= loginProps.error %>
+                    </div>
+                    <% } %>
+
+                        <form method="post" action="/login" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <!-- <label for="username" class="form-label">Username:</label> -->
+                                <input type="text" class="form-control" id="username" name="username"
+                                    placeholder="Username" required>
+                                <div class="valid-feedback">Looks good! </div>
+                            </div>
+                            <div class="mb-3">
+                                <!-- <label for="password" class="form-label">Password:</label> -->
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password" required>
+                                <div class="invalid-feedback">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                            <input type="hidden" name="serviceUrl" value="<%= loginProps.serviceUrl %>">
+                            <button type="submit" class="btn"
+                                style="width: 100%; background-color: #333366; color: #FFFFFF;">Login</button>
+                        </form>
+
+                        <br>
+                        <a href="/forget-password" class="link">forgot password ?</a>
+            </div>
+
+            <!-- Birhday, Aniversery Div -->
+            <div class="col-md-6 p-5">
+                <% if (loginProps.birthdayList.length> 0) { %>
+                    <div class="login-birthday" style="background-image: url(http://localhost:5000/login-birthday.svg)">
+                        <div class="birthday-img">
+                            <div class="birthday-back"></div>
+                            <img src="http://localhost:5000/uploads/employee/github_photo.jpg" alt="birthday-image"
+                                class="birthday-image" />
+                        </div>
+                        <h1 class="greet">HAPPY BIRTHDAY</h1>
+                        <span class="greet-span">
+                            <%= loginProps.birthdayList[0].birthdayName %>
+                                <% "http://localhost:5000/" + loginProps.birthdayList[0].birthdayImage %>
+                        </span>
+                        <p class="greet-p">From good friends and true, from old friends and new, may good luck go with
+                            you and happiness too!</p>
+                        <!-- <img src="http://localhost:5000/" alt="birthday-image" class="slider" /> -->
+                    </div>
+                    <% } else { %>
+                        <img src="http://localhost:5000/frame1.png" alt="frame 1" width="100%" height="100%"
+                            class="frame" />
+                        <% } %>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

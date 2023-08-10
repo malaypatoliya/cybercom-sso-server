@@ -1,0 +1,26 @@
+{
+    "development": {
+        "username": "cccsql",
+        "password": "ccc123",
+        "database": "SSO_SERVER",
+        "host": "192.168.0.204",
+        "dialect": "mysql",
+        "logging": false
+    },
+    "test": {
+        "username": "cccsql",
+        "password": "ccc123",
+        "database": "HRMS_TEST",
+        "host": "192.168.0.204",
+        "dialect": "mysql",
+        "logging": false
+    },
+    "production": {
+        "username": "root",
+        "password": null,
+        "database": "database_production",
+        "host": "192.168.0.204",
+        "dialect": "mysql",
+        "logging": false
+    }
+}
