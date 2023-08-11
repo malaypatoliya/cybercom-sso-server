@@ -12,9 +12,6 @@ router.get("/", (req, res) => {
 	res.send("Hello World!");
 });
 
-// set password route
-router.post("/set-password", controller.setPassword);
-
 // Login page get
 router.get("/login", controller.getLoginPage);
 
@@ -30,15 +27,22 @@ router.get("/forgot-password", controller.getForgotPasswordPage);
 // post forgot password
 router.post("/forgot-password", controller.forgotPassword);
 
-// get otp page
-router.get("/verify", controller.getVerificationCodePage);
-
 // post otp
 router.post("/verify", controller.verifyVerificationCode);
 
+// get reset password page
+router.get("/reset-password/:code", controller.getResetPasswordPage);
+
+// set password route
+router.post("/set-password", controller.setPassword);
+
+router.get("error", (req, res) => {
+	return res.render('error');
+});
+
 // error route
 router.use("*", (req, res) => {
-	return res.render('error', { error: "Page not found" });
+	return res.render('error');
 });
 
 module.exports = router;

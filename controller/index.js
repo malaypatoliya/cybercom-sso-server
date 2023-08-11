@@ -1,53 +1,16 @@
 const APIResponseFormat = require('../utils/APIResponseFormat');
 const { encrypt, decrypt, generateSalt, hashPassword, generateToken, generateSessionId, decodeToken, generateVerificationCode } = require("../utils/helper");
 const db = require('../db/models/index');
+const { Op } = require('sequelize');
 const service = require('../services/index');
 const { sendMail } = require('../core/nodemailer');
+const e = require('express');
 
 // allowed origin app name mapping with url (serviceUrl)
 const allowedOrigin = {
     "http://localhost:3000": true,
     "http://localhost:3001": true,
 };
-
-const setPassword = async (req, res) => {
-    try {
-        let { username, password } = req.body;
-
-        if (!username || !password) {
-            return APIResponseFormat._ResMissingRequiredField(res, "Required fields are missing");
-        }
-
-        // if check username exists or not
-        const user = await db.sso_employees.findOne({
-            where: {
-                employeeCode: username
-            }
-        })
-        if (!user) {
-            return APIResponseFormat._ResDataNotFound(res, "User not exists");
-        }
-
-        const salt = generateSalt(10);
-        const hashedPassword = hashPassword(password, salt);
-
-        // update password
-        const result = await db.sso_employees.update({
-            password: hashedPassword,
-            salt: encrypt(salt)
-        }, {
-            where: {
-                employeeCode: username
-            }
-        })
-        if (!result) {
-            return APIResponseFormat._ResDataNotUpdated(res, "Password not updated");
-        }
-        return APIResponseFormat._ResDataUpdated(res, "Password updated successfully");
-    } catch (error) {
-        return APIResponseFormat._ResServerError(res, error);
-    }
-}
 
 const getLoginPage = async (req, res) => {
     try {
@@ -251,7 +214,7 @@ const getForgotPasswordPage = async (req, res) => {
     try {
         return res.render('forgot-password')
     } catch (error) {
-        return APIResponseFormat._ResServerError(res, error);
+        return res.render('error');
     }
 }
 
@@ -265,7 +228,7 @@ const forgotPassword = async (req, res) => {
         // check email exists or not
         const existEmail = await db.sso_employees.findOne({
             where: {
-                employeeEmail: email
+                employeeEmail: encrypt(email)
             }
         })
         if (!existEmail) {
@@ -281,7 +244,7 @@ const forgotPassword = async (req, res) => {
             verificationExpiry: Date.now() + 5 * 60 * 1000 // 5 minutes expiry
         }, {
             where: {
-                employeeEmail: email
+                employeeEmail: encrypt(email)
             }
         })
 
@@ -298,22 +261,93 @@ const forgotPassword = async (req, res) => {
         await sendMail(mailContent);
 
     } catch (error) {
-        return APIResponseFormat._ResServerError(res, error);
-    }
-}
-
-const getVerificationCodePage = async (req, res) => {
-    try {
-        return res.render('verify-code')
-    } catch (error) {
-        return APIResponseFormat._ResServerError(res, error);
+        return res.render('error');
     }
 }
 
 const verifyVerificationCode = async (req, res) => {
     try {
-        return APIResponseFormat._ResDataFound(res, "Verification code verified successfully")
+        let { email, verificationCode } = req.body;
+        if (!email) {
+            return APIResponseFormat._ResMissingRequiredField(res, "Email is required");
+        }
+        if (!verificationCode) {
+            return APIResponseFormat._ResMissingRequiredField(res, "Verification code is required");
+        }
 
+        email = encrypt(email);
+
+        // verify the verification code and expiry time
+        const isVerified = await db.sso_employees.findOne({
+            where: {
+                employeeEmail: email,
+                verificationCode: verificationCode,
+                verificationExpiry: {
+                    [Op.gte]: Date.now()
+                }
+            }
+        })
+
+        if (!isVerified) {
+            return APIResponseFormat._ResError(res, "Invalid verification code");
+        }
+
+        return APIResponseFormat._ResDataFound(res, "Verification code verified successfully", {
+            email: email.replace(/\+/g, '-').replace(/\//g, '_'),
+            verificationCode: verificationCode,
+            verificationExpiry: isVerified.verificationExpiry
+        })
+
+    } catch (error) {
+        return res.render('error');
+    }
+}
+
+const getResetPasswordPage = async (req, res) => {
+    try {
+        return res.render('reset-password')
+    } catch (error) {
+        return res.render('error');
+    }
+}
+
+const setPassword = async (req, res) => {
+    try {
+        let { email, password } = req.body;
+
+        // encryptedCandidateId.replace(/\+/g, '-').replace(/\//g, '_'); // replace - with + and _ with /
+        email = email.replace(/-/g, '+').replace(/_/g, '/');
+
+        if (!email || !password) {
+            return APIResponseFormat._ResMissingRequiredField(res, "Required fields are missing");
+        }
+
+        // if check username exists or not
+        const user = await db.sso_employees.findOne({
+            where: {
+                employeeEmail: email
+            }
+        })
+        if (!user) {
+            return APIResponseFormat._ResError(res, "Invalid email");
+        }
+
+        const salt = generateSalt(10);
+        const hashedPassword = hashPassword(password, salt);
+
+        // update password
+        const result = await db.sso_employees.update({
+            password: hashedPassword,
+            salt: encrypt(salt)
+        }, {
+            where: {
+                employeeEmail: email
+            }
+        })
+        if (!result) {
+            return APIResponseFormat._ResDataNotUpdated(res, "Password not updated");
+        }
+        return APIResponseFormat._ResDataUpdated(res, "Password updated successfully");
     } catch (error) {
         return APIResponseFormat._ResServerError(res, error);
     }
@@ -326,6 +360,6 @@ module.exports = {
     validateToken,
     getForgotPasswordPage,
     forgotPassword,
-    getVerificationCodePage,
-    verifyVerificationCode
+    verifyVerificationCode,
+    getResetPasswordPage
 }

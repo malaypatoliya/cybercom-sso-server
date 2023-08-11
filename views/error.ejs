@@ -1,13 +1,41 @@
-<!-- views/error.ejs -->
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>SSO Error</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Something Went Wrong</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      /* background-color: #f0f0f0; */
+      background-image: url("http://localhost:5000/bg.png") !important;
+    }
+    .error-container {
+      margin-top: 100px;
+    }
+    .error-title {
+      font-size: 24px;
+      color: #ff6900;
+      margin-bottom: 10px;
+    }
+    .error-message {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .error-svg {
+      width: 150px;
+      height: 150px;
+      fill: #fcb900;
+    }
+  </style>
 </head>
-
 <body>
-    <p style="font-size: 22px;"><%= error %></p>
+  <div class="error-container">
+    <img src="http://localhost:5000/error.png" alt="404" class="error-svg"><br><br>
+    <div class="error-title">Something Went Wrong</div>
+    <div class="error-message">Please try again later</div>
+  </div>
 </body>
-
 </html>
