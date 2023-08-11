@@ -5,7 +5,8 @@
         "database": "SSO_SERVER",
         "host": "192.168.0.204",
         "dialect": "mysql",
-        "logging": false
+        "logging": false,
+        "timezone": "+05:30"
     },
     "test": {
         "username": "cccsql",

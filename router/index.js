@@ -24,9 +24,17 @@ router.post("/login", controller.login);
 // validate session 
 router.post("/validate-token", controller.validateToken);
 
-// Logout
-// router.post("/logout", controller.logout);
+// get forgot password page
+router.get("/forgot-password", controller.getForgotPasswordPage);
 
+// post forgot password
+router.post("/forgot-password", controller.forgotPassword);
+
+// get otp page
+router.get("/verify", controller.getVerificationCodePage);
+
+// post otp
+router.post("/verify", controller.verifyVerificationCode);
 
 // error route
 router.use("*", (req, res) => {

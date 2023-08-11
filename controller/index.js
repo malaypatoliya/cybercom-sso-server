@@ -1,8 +1,8 @@
 const APIResponseFormat = require('../utils/APIResponseFormat');
-const { encrypt, decrypt, generateSalt, hashPassword, generateToken, generateSessionId, decodeToken } = require("../utils/helper");
+const { encrypt, decrypt, generateSalt, hashPassword, generateToken, generateSessionId, decodeToken, generateVerificationCode } = require("../utils/helper");
 const db = require('../db/models/index');
 const service = require('../services/index');
-const e = require('express');
+const { sendMail } = require('../core/nodemailer');
 
 // allowed origin app name mapping with url (serviceUrl)
 const allowedOrigin = {
@@ -247,44 +247,85 @@ const validateToken = async (req, res) => {
     }
 }
 
-// const logout = async (req, res) => {
-//     try {
-//         // get the parameters from header
-//         const { session_id } = req.headers;
+const getForgotPasswordPage = async (req, res) => {
+    try {
+        return res.render('forgot-password')
+    } catch (error) {
+        return APIResponseFormat._ResServerError(res, error);
+    }
+}
 
-//         // check session_id is passed or not
-//         if (!session_id) {
-//             return APIResponseFormat._ResMissingRequiredField(res, "Required fields are missing");
-//         }
+const forgotPassword = async (req, res) => {
+    try {
+        let { email } = req.body;
+        if (!email) {
+            return APIResponseFormat._ResMissingRequiredField(res, "Email is required");
+        }
 
-//         // check session_id is valid or not (exists in database)
-//         const session = await db.sso_sessions.findOne({
-//             where: {
-//                 sessionId: session_id
-//             }
-//         })
-//         if (!session) {
-//             return APIResponseFormat._ResDataNotFound(res, "Session not exists");
-//         }
+        // check email exists or not
+        const existEmail = await db.sso_employees.findOne({
+            where: {
+                employeeEmail: email
+            }
+        })
+        if (!existEmail) {
+            return APIResponseFormat._ResError(res, "Email does not exists");
+        }
 
-//         // delete the session from database
-//         await db.sso_sessions.destroy({
-//             where: { sessionId: session_id }
-//         })
+        // generate verification code
+        const verificationCode = generateVerificationCode();
 
-//         // clear the cookie from browser
-//         // res.clearCookie('sessionId');
+        // save verification code in database
+        await db.sso_employees.update({
+            verificationCode: verificationCode,
+            verificationExpiry: Date.now() + 5 * 60 * 1000 // 5 minutes expiry
+        }, {
+            where: {
+                employeeEmail: email
+            }
+        })
 
-//         return APIResponseFormat._ResDataFound(res, "Logout successfully");
-//     } catch (error) {
-//         return APIResponseFormat._ResServerError(res, error);
-//     }
-// }
+        APIResponseFormat._ResDataFound(res, "Verification code sent successfully", {
+            verificationCode: verificationCode
+        })
+
+        // send email
+        const mailContent = {
+            to: email,
+            subject: "Forgot password",
+            body: `<p>Verification code: <b>${verificationCode}</b></p>`
+        }
+        await sendMail(mailContent);
+
+    } catch (error) {
+        return APIResponseFormat._ResServerError(res, error);
+    }
+}
+
+const getVerificationCodePage = async (req, res) => {
+    try {
+        return res.render('verify-code')
+    } catch (error) {
+        return APIResponseFormat._ResServerError(res, error);
+    }
+}
+
+const verifyVerificationCode = async (req, res) => {
+    try {
+        return APIResponseFormat._ResDataFound(res, "Verification code verified successfully")
+
+    } catch (error) {
+        return APIResponseFormat._ResServerError(res, error);
+    }
+}
 
 module.exports = {
     setPassword,
     getLoginPage,
     login,
     validateToken,
-    // logout,
+    getForgotPasswordPage,
+    forgotPassword,
+    getVerificationCodePage,
+    verifyVerificationCode
 }

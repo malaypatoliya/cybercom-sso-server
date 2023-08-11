@@ -69,6 +69,15 @@ module.exports = {
     // kWDvVnAW84hy4mzxrXlnIpQ9A10 genrate string like this for session id and store in db
     generateSessionId: () => {
         return md5(Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15));
+    },
+
+    generateVerificationCode: () => {
+        let code = "";
+        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for (let i = 0; i < 10; i++) {
+            code += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+        return code;
     }
 
 };

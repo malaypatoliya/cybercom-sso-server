@@ -1,0 +1,113 @@
+{
+    "allowBody": false,
+    "allowHeaders": false,
+    "allowMailForInterview": true,
+    "elasticSearch": {
+        "host": "http://192.168.0.204:9200",
+        "username": "elastic",
+        "password": "c5WhHGRNQZgFPSU29FpK",
+        "developmentIndex": "hrms_candidate",
+        "productionIndex": "hrms_candidate_production"
+    },
+    "cybercomWebBaseUrl": "https://api.cybercomcreation.com",
+    "googleDrive": {
+        "devlopment": {
+            "clientId": "569244858817-cfrbunierkpt8n8nob3r2dmpj0qeqdbn.apps.googleusercontent.com",
+            "clientSecretId": "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",
+            "redirectUrl": "https://developers.google.com/oauthplayground",
+            "refreshToken": "1//04pZNY-gWLCcMCgYIARAAGAQSNwF-L9Ir_A-qV7p91pkgt5DOVBx4ZoI2L4lhT99L-ytqI9YK89GLwmtUEmtz2RuFvH-_4KpFRWA",
+            "adharFolderKey": "1fob2dJoZfQvU_phEIlQhwJzQ-pdCp2uu",
+            "checklistFolderKey": "1zPU0-qJFeQCsiyy23WrphyYyvlxllkLQ",
+            "panFolderKey": "1m6-BUDd8rIo9y9T7lw0isjh0R0uxQehq",
+            "employeeResumesFolderKey": "1giPiSOIvy70UPDmhLO7v8PYgP05AFlQu",
+            "candidateResumesFolderKey": "1OF3Nzz7FGHdDbNiTtQRhPvhJ3bgKOZdl",
+            "internResumesFolderKey": "15nE6SLtrjohgFdt6Yxu4-ayg9CKJ9pve",
+            "projectDefinationFolderKey": "1p_bvoE6Z4qZhkCM_ML0kIewMCiCKVr5H",
+            "candidateAdharFolderKey": "1kxvONTn1L8CA0Q5uStwhSH_dJ_15RLBG",
+            "candidatePanFolderKey": "1oYv19VreyA3H9Dwii_ONdPG4iHVkACML",
+            "candidatepassportFolderKey": "1Fg_ZeivAkhd3F3zbQXTeg-x7Yh43Ke4f",
+            "candidatePresentAddressFolderKey": "1SyoGTU3gQ-mq1kNXR0afoOxkS5veOhtn",
+            "candidatePermentAddressFolderKey": "1oC3d9YYyNLlaAiccyv8fb0l1c8mxUbf_",
+            "candidateEducationCertificatesFolderKey": "1_mbNDbceb75zrewdHmwKXwPBXpEqnVze",
+            "candidateSalarySlipFolderKey": "1_SWyvoee0Q57DJyhMMkp3xn-QXi7CfBS",
+            "candidateForm16OfPreviousEmployerFolderKey": "1UI0MQSIfYDv2Yi7O7tsI2jP-uvfmxa87",
+            "candidateLatestRelievingLetterFolderKey": "1FsybQRkr9CYkOZ83X8INihQYaq9Vpcb_",
+            "candidateLatestExperienceLetterFolderKey": "1jRGP0v19eWsJtP7RtHPwqhJY6fRauHT4"
+        },
+        "production": {
+            "clientId": "496008879088-g2s958uonl731s82as5u6kp9h0vpu3kb.apps.googleusercontent.com",
+            "clientSecretId": "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",
+            "redirectUrl": "https://developers.google.com/oauthplayground",
+            "refreshToken": "1//04pZ1xCSWYtzdCgYIARAAGAQSNwF-L9IrnRw463YO6kLOUVdhBvTQGqDEpkjplf2LuJsMljgpzr-4NbsGKjLbJHsxDxlb29NGs30",
+            "adharFolderKey": "1d1H2IjvjV-Z6hTcy9GY5iQ8boOdhcKhI",
+            "checklistFolderKey": "1-jVu5-a-R3MQ_jfkdacsXVrMiDKUAwCE",
+            "panFolderKey": "1jlll09e5tkjk4pG6mhi5FPI7QB0t1EVU",
+            "employeeResumesFolderKey": "1Di3-JjpKr1E-KZ01YATGCY1uWS3DWWho",
+            "candidateResumesFolderKey": "1kfjlMWHOD-i2omwdmBdvNI_-_BahxyXQ",
+            "internResumesFolderKey": "1lPsl6M5Y0Oaj54zCDySHXc3GzwL8pz6k",
+            "projectDefinationFolderKey": "1TZ_C3l8HTWb2_m8mqfoPUxGhpyuPTCzo"
+        }
+    },
+    "googleMeet": {
+        "development": {
+            "clientId": "569244858817-cfrbunierkpt8n8nob3r2dmpj0qeqdbn.apps.googleusercontent.com",
+            "clientSecretId": "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",
+            "refreshToken": "1//04QHTckmTwaDICgYIARAAGAQSNwF-L9IrL3dNSd4jwtkTa4uM_6Pzaj0fT8f0uI1rp0YnHuIrp3mE9x9mo8qdUOSpR2JzVscq0fg",
+            "redirectUrl": "https://developers.google.com/oauthplayground"
+        },
+        "production": {
+            "clientId": "496008879088-g2s958uonl731s82as5u6kp9h0vpu3kb.apps.googleusercontent.com",
+            "clientSecretId": "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",
+            "refreshToken": "1//04zMcdwFE2QMJCgYIARAAGAQSNwF-L9IrSOBGZ-ImGvMYQnYh_XcEWimkizEqT2ik94XxipLpL5DbkA-uiNveYSFxWr3lsO8xkFI",
+            "redirectUrl": "https://developers.google.com/oauthplayground"
+        }
+    },
+    "mail": {
+        "development": {
+            "clientEmail": "confinement.ccc0810@gmail.com",
+            "clientId": "569244858817-cfrbunierkpt8n8nob3r2dmpj0qeqdbn.apps.googleusercontent.com",
+            "clientSecretId": "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",
+            "refreshToken": "1//04y1dFrU5ZJowCgYIARAAGAQSNwF-L9IrSLyyHJ7pV1sus3lTUERDhuRYdVqhhteq-OefBjzdu-B4-NlyCY4U-eHpi-_a5EBlFRY",
+            "redirectUrl": "https://developers.google.com/oauthplayground"
+        },
+        "production": {
+            "clientEmail": "confinement.ccc0810@gmail.com",
+            "clientId": "569244858817-cfrbunierkpt8n8nob3r2dmpj0qeqdbn.apps.googleusercontent.com",
+            "clientSecretId": "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",
+            "refreshToken": "1//04y1dFrU5ZJowCgYIARAAGAQSNwF-L9IrSLyyHJ7pV1sus3lTUERDhuRYdVqhhteq-OefBjzdu-B4-NlyCY4U-eHpi-_a5EBlFRY",
+            "redirectUrl": "https://developers.google.com/oauthplayground"
+        }
+    },
+    "inbox": {
+        "development": {
+            "clientEmail": "manshvi.parekh.ccc@gmail.com",
+            "clientId": "510157386607-mdo92egjildj0q6o5vb3ium0ml2n8gug.apps.googleusercontent.com",
+            "clientSecretId": "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",
+            "refreshToken": "1//04aG2LUMKOgqICgYIARAAGAQSNwF-L9IrsoU69e4zqXmi2o8fNtDhM3y2B_pwkjSNR_bB1CXacPaeF3wenqOwQBGxi8DbsmlZHpI",
+            "redirectUrl": "https://developers.google.com/oauthplayground"
+        },
+        "production": {
+            "clientEmail": "manshvi.parekh.ccc@gmail.com",
+            "clientId": "510157386607-mdo92egjildj0q6o5vb3ium0ml2n8gug.apps.googleusercontent.com",
+            "clientSecretId": "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",
+            "refreshToken": "1//04aG2LUMKOgqICgYIARAAGAQSNwF-L9IrsoU69e4zqXmi2o8fNtDhM3y2B_pwkjSNR_bB1CXacPaeF3wenqOwQBGxi8DbsmlZHpI",
+            "redirectUrl": "https://developers.google.com/oauthplayground"
+        }
+    },
+    "firebase": {
+        "development": {
+            "type": "service_account",
+            "project_id": "cybercom-app-55743",
+            "private_key_id": "2eb687a84da69b96a6493a2e4003aaa3ba7a9b9f",
+            "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCTe20Kg7o6zrep\nNH8pZQULwUXIDgUMN9S9fIzdBzJGtUnQ4X7BszpHC8JABg8EjTa3klwm85fKKmBa\ngrvOdC4SSb0hN+LZvTc1OtOTvInlq4nq4g5ss0Gr94BjRRs7JaG+MTpGN8mJRAX7\nlXgMGvCV+bWvApIZ9+urMEwWhGSlzdgduHT4Lwo/HmSYSlSjZlFWsnYA0G7CZsjq\nH286LL0bNcboRJMVfVUM8nyOYG5uKxBQNZ6P1uGYO5Qku/lgMDBzqk4rmWJ4JOR1\nI2b7EGKiorEMAsi2ojhzHTReDg/eg1rcGBwZUymXJRLDJ7Tqb6AfFxpZirMNK37n\nSrCvg37TAgMBAAECggEAE4M1eo98xgdlP52io2M/sdNI5xPfxsLjl+G7hgohNJS2\nEaJRUdG43f8oHK4Qh5gitf1HHvTZ+iqgI+l/F+zBebRIMcsXQu/+DBdejdct4XVQ\nIoOfx/GcOI3e7oNipnEvVJ67veA8qbdrw+JTMeV7O5nVrV7S3gex+6zArGFTgFIn\nsvl2dZQdBTtm2FAvV7dejjvRsvSw+eou+lCXvCno/IHDZ6Ba/E9FJoloiOmrj0x/\nKd8J2p4JeGljR8HqOYGWNiv1G0EhIhj0/E3AtAmDQyO0tyi7/AZeC8CUSyaxUuOn\npD6Rf8A40daxDyxrRcu6o/oxNzRdrDn8dhuRX/+LLQKBgQDOrg9vkHsL8Iqcm3Lz\np9aXN26lvbZXhBffrVTypDahqoPawqIdxhrRE5xuLQthGoTDNjg5ex5fZB0SCVwQ\nBP0pOZP19dULCulxVjSz8TgE0Fb9Fl6NyMKgD0EljSFjeRR2l2NGGvA6s0YAy5ch\n+Rj1wg4hLAaF2E9POItHShYYzwKBgQC2rQMF20iWCqizqKWmg+XzFg6ZF8N2s7n5\nYyVU1CZigK4RNUjdEXmH5sdGUvo2LKvGLLKDwIaSFZDUkuIUY+PT74TNKMOveeK4\nzh9UnwKaGcFWO9tMbe8zoUvAcm11ghjRU51n+NCKOG20dncxznSf6SCyALS2k0Og\n+q2nQylyvQKBgQCEtH50w/A92lUl+Sn2CO5gaddB1G4gA1DQ7hp9MbNiWnoPHKm7\nNFhDprPqikGkN8LHFSlEvyjhVwbTbe8O2iUzMyUt6IrCbF83xoJQh7HQZXV1S8eq\ngh11aFYMJnIpzLS28L1tZh6ZkkKAgDiqN6cvJUqtQfduOVWzKDtFquxFQQKBgQCE\nVf/rnTkPYTdnt5QRdln+aQs4QuvaMUdX8EhaFLqd/2SamMRpSkCFgFz6iCA1YNUr\n4rOMGMwkRjU+mg3oAZlJrqnBSnfAxobFpKUz02G6K1BRXVl4G+f+uim7h+neB9pc\nwrs0WB8TEt/+rReaYFtCgUurSDGiVjrXAuMMWe5L7QKBgH1/fvXxr5q1geChjkWP\n55UGbGMliNgQ1zy8/E5pwpQBU8eIZb4GdsWzV9zJYmdwbODK/PZN/LWcDi/7bYRI\nTBLwf9OTD9KKCrG10MN1uulmrMbb6iiuUWUoo/OmtotXsfcSYHb50vJseLFeV8W3\n0sOHfXstkY4OlsP1MZf00lL/\n-----END PRIVATE KEY-----\n",
+            "client_email": "firebase-adminsdk-ibu6v@cybercom-app-55743.iam.gserviceaccount.com",
+            "client_id": "107297076556763460831",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://oauth2.googleapis.com/token",
+            "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+            "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ibu6v%40cybercom-app-55743.iam.gserviceaccount.com"
+        },
+        "production": {}
+    },
+    "isProduction": false
+}
