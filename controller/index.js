@@ -240,7 +240,7 @@ const forgotPassword = async (req, res) => {
 
         // save verification code in database
         await db.sso_employees.update({
-            verificationCode: verificationCode,
+            verificationCode: encrypt(verificationCode),
             verificationExpiry: Date.now() + 5 * 60 * 1000 // 5 minutes expiry
         }, {
             where: {
@@ -276,6 +276,7 @@ const verifyVerificationCode = async (req, res) => {
         }
 
         email = encrypt(email);
+        verificationCode = encrypt(verificationCode);
 
         // verify the verification code and expiry time
         const isVerified = await db.sso_employees.findOne({
@@ -294,8 +295,6 @@ const verifyVerificationCode = async (req, res) => {
 
         return APIResponseFormat._ResDataFound(res, "Verification code verified successfully", {
             email: email.replace(/\+/g, '-').replace(/\//g, '_'),
-            verificationCode: verificationCode,
-            verificationExpiry: isVerified.verificationExpiry
         })
 
     } catch (error) {
